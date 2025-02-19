@@ -1,0 +1,34 @@
+from my_webserver import MyWebServer
+from http.server  import SimpleHTTPRequestHandler
+import os 
+
+PORT = (os.getenv('PORT') or 3001)
+
+class ManuseioHttpRequest(SimpleHTTPRequestHandler):
+    def do_GET(self):
+        if self.path ==  "/":
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.end_headers()
+            self.wfile.write("<p> HAHAHAHAHAHa<p>".encode())
+        elif self.path == "/paginal":
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.end_headers()
+            self.wfile.write("<h1>Oh, you touch my talala, Hmmm... my ding ding dong. La la la la la la la, La la la la la la, La la la la la la la. Oh, you touch my talala La la la la la la la, La la la la la la. Hmmm... my ding ding dong. La la la la la la la, La la la la la la. Deep in the night, I'm looking for some fun, Deep in the night, I'm looking for some love. De-de-de-deep in the night, I'm looking for some fun, Deep in the night,<h1><img src= 'data:image/jpeg;base64,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'>".encode())
+        elif self.path == "/index":
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.end_headers()
+            res_body = open('index.html', "r").read().format_map({
+                "PORT":PORT
+            })
+            self.wfile.write(res_body.encode())
+        else:
+            self.send_error(404)
+            #return super().do_GET()
+
+app = MyWebServer(ManuseioHttpRequest)
+
+if __name__ == "__main__":
+    app.run()
