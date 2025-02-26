@@ -1,0 +1,16 @@
+<!-- app/templates/index.html -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Sejam bem vindos!</h1>
+    <p> Ola {{ user.username }}</p>
+    {% for post in posts %}
+    <div><p>{{ post.author.username }} disse: <b>{{ post.body }}</b></p></div>
+    {% endfor %}
+
+    {% for imga in imgs %}
+    <img src={{imga.a}} alt="Minha Figura">
+    {% endfor %}
+
+    <img src={{img}} alt="Minha Figura">
+{% endblock %}
