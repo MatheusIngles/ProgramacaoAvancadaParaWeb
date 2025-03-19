@@ -1,24 +1,19 @@
 # app/routes.py
 from flask import render_template, flash, redirect, url_for
-from app import app
+from app import app, db
 from app.forms import LoginForm
 from random import randint
+import sqlalchemy as sa
+from app.models import User, Post
+
 
 @app.route('/')
 @app.route('/index')
 
 def index():
     user = {'username': 'Matheus'}
-    posts = [
-        {
-        'author': {'username': 'Joao'},
-        'body': 'Belo dia em Vila Velha!'
-        },
-        {
-        'author': {'username': 'Maria'},
-        'body': 'Bora para o cinema hoje?'
-        }
-    ]
+    query =  sa.select(Post)
+    posts = db.session.scalars(query).all()
     numero = randint(1, 2)
     if(numero == 1):
         img = 'https://preview.redd.it/tdebr2qaf7ee1.jpeg?width=640&crop=smart&auto=webp&s=1ed7f2e0c74463dd8270f5523e42d7736cf8b627'
