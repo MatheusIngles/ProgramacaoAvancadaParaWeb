@@ -1,5 +1,5 @@
 # app/__init__.py
-# pip install flask flask-wtf flask-sqlalchemy flask-migrate datatime flask-login
+# pip install flask flask-wtf flask-sqlalchemy flask-migrate datepipotime flask-login
 
 from flask import Flask
 from config import Config

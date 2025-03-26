@@ -6,7 +6,7 @@ from app.forms import LoginForm
 from random import randint
 import sqlalchemy as sa
 from app.models import User, Post
-
+from urllib.parse import urlsplit
 from flask_login import login_user, logout_user, current_user, login_required
 
 
@@ -50,10 +50,20 @@ def login():
             next_page = url_for('index')
 
         flash("Login solicitado pelo usuario {}, Remeber ME = {}".format(form.username.data, form.remember_me.data))
-        return redirect(url_for(next_page))
+        return redirect(next_page)
     return render_template('login.html', title='Login', form=form)
 
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = db.first_or_404(sa.select(User).where(User.username == username))
+    posts = [
+    {'author': user, 'body': 'Test post #1'},
+    {'author': user, 'body': 'Test post #2'}
+    ]
+    return render_template('user.html', user=user, posts=posts)
